@@ -1276,27 +1276,21 @@ Blockly.Blocks["grove_ldr"] = {
 };
 
 
-Blockly.Blocks["sds011"] = {
-  init: function() {
-    this.appendDummyInput().appendField("Configurer un capteur SDS011");
-    this.appendValueInput("rx", "Number").appendField("Connecteur RX");
-    this.appendValueInput("tx", "Number").appendField("Connecteur TX");
-    this.setColour("#00929F");
-  }
-};
 
-Blockly.Blocks["sds011_pm10"] = {
-  init: function() {
-    this.appendDummyInput().appendField("Valeur de PM10");
-    this.setColour("#00929F");
-    this.setOutput(true, "Number");
-  }
-};
 
-Blockly.Blocks["sds011_pm25"] = {
-  init: function() {
-    this.appendDummyInput().appendField("Valeur de PM2.5");
-    this.setColour("#00929F");
-    this.setOutput(true, "Number");
+Blockly.Blocks['sds011'] = { init: function() {
+  this.appendDummyInput().appendField("Configurer le capteur de particules fines SDS011");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("RX pin :")
+        .appendField(new Blockly.FieldNumber("1"), "RX");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("TX pin :")
+        .appendField(new Blockly.FieldNumber("2"), "TX");
+    this.setInputsInline(false);
+    this.setColour(315);
+    this.setTooltip('ce bloc sert à...');
+    this.setHelpUrl('http://www.mon-club-elec.fr/pmwiki_reference_arduino/pmwiki.php?n=Main.ReferenceMaxi');
   }
 };

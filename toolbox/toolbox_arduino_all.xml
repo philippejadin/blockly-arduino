@@ -140,8 +140,6 @@
 			<block type="cap661"></block>
 			<block type="potentiometre"></block>
 			<block type="sds011"></block>
-			<block type="sds011_pm25"></block>
-			<block type="sds011_pm10"></block>
 		</category>
 	</category>
 	<category name="CAT_com" colour="#006000">
