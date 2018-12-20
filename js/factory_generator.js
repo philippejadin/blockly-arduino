@@ -249,11 +249,11 @@ function updateGenerator() {
           break;
       }
     }
-	code.push("  Blockly.Arduino.includes_[] = 'placer ici le code de ma bibliotheque';");
-	code.push("  Blockly.Arduino.variables_[] = 'placer ici le code de mes variables';");
-	code.push("  Blockly.Arduino.definitions_[] = 'placer ici le code de mes instances';");
-	code.push("  Blockly.Arduino.userFunctions_[] = 'placer ici le code de mes fonctions';");
-    code.push("  Blockly.Arduino.setups_[]='placer ici le code du setup()';");
+	code.push("  Blockly.Arduino.includes_['" + blockType + "'] = 'placer ici le code de ma bibliotheque';");
+	code.push("  Blockly.Arduino.variables_['" + blockType + "'] = 'placer ici le code de mes variables';");
+	code.push("  Blockly.Arduino.definitions_['" + blockType + "'] = 'placer ici le code de mes instances';");
+	code.push("  Blockly.Arduino.userFunctions_['" + blockType + "'] = 'placer ici le code de mes fonctions';");
+    code.push("  Blockly.Arduino.setups_['" + blockType + "']='placer ici le code du setup()';");
 	code.push("  var code = \'placer ici le code du loop()\';");
     if (rootBlock.getFieldValue('CONNECTIONS') == 'LEFT') {
       code.push("  return [code, Blockly.Arduino.ORDER_ATOMIC];");
