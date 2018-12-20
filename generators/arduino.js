@@ -677,7 +677,7 @@ Blockly.Arduino['sds011'] = function(block) {
   Blockly.Arduino.definitions_['sds011'] = 'SdsDustSensor sds(' + rx + ', ' + tx + ');';
   Blockly.Arduino.userFunctions_['sds011'] = `float sds011Read(int type)
 {
-  sds.queryPm();
+  PmResult pm = sds.queryPm();
   if (pm.isOk()) {
     if (type == 10)
     {
