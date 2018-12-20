@@ -29,7 +29,7 @@ Blockly.Blocks.sds011_read = {
     this.setInputsInline(false);
     this.setOutput(true);
     this.setColour("#00929f");
-    this.setTooltip('ce bloc sert à...');
+    this.setTooltip('Ce bloc sert à lire le nombre de particule fines détectées');
     this.setHelpUrl('https://github.com/lewapek/sds-dust-sensors-arduino-library');
   }
 };

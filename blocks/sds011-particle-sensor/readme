@@ -1,0 +1,2 @@
+This block allows one to use the SDS011 particle sensor.
+It uses this library : https://github.com/lewapek/sds-dust-sensors-arduino-library

@@ -9,7 +9,6 @@ Blockly.Arduino.sds011 = function(block) {
   var rx = block.getFieldValue('RX');
   var tx = block.getFieldValue('TX');
   Blockly.Arduino.includes_.sds011 = '#include "SdsDustSensor.h"';
-  //Blockly.Arduino.variables_['sds011'] = 'placer ici le code de mes variables';
   Blockly.Arduino.definitions_.sds011 = 'SdsDustSensor sds(' + rx + ', ' + tx + ');';
   Blockly.Arduino.userFunctions_.sds011 = `float sds011Read(int type)
 {
