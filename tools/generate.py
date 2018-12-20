@@ -1,18 +1,23 @@
+# This script will generate the correct javascript files from the blocks installed in /blocks
+
+
+# Utility function to get a listing of directories
 import os
 def get_subdirectories(a_dir):
     return [name for name in os.listdir(a_dir)
             if os.path.isdir(os.path.join(a_dir, name))]
 
 
-# get a list of modules
-modules = get_subdirectories('../blocks')
 
-#create our definition arduino.js file
+# Prepare our files
+
+# create our definition arduino.js file
 arduino_definition_js = open('../blocks/arduino.js', 'w')
 
-#create our generator arduino.js file
+# create our generator arduino.js file
 arduino_generator_js = open('../generators/arduino.js', 'w')
 
+# Add some warning so people don't edit those files
 for file in [arduino_definition_js, arduino_generator_js]:
     file.write("""
 /*
@@ -23,7 +28,7 @@ Then run python generate.py in the /tools directory
 
 """)
 
-
+# add an header to the definition file
 arduino_definition_js.write("""
 "use strict";
 goog.provide("Blockly.Blocks.arduino");
@@ -31,7 +36,12 @@ goog.require("Blockly.Blocks");
 
 """)
 
+
+# Get a list of modules
+modules = get_subdirectories('../blocks')
+
 # append content from each module in the js files
 for module in modules:
     arduino_definition_js.write(open('../blocks/' + module + '/definition.js').read())
     arduino_generator_js.write(open('../blocks/' + module + '/generator.js').read())
+    print 'Added block ' + module
