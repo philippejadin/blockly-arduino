@@ -18,7 +18,7 @@ This project is at the start pure JS/HTML using google blockly. Just open index.
 
 The desktop app is done with electron and nodejs where needed. This allows to communicate with a connected arduino and compule / upload code directly from the dedicated app.
 
-- Install nvm to install a specific node version so we all work with  the same system. I recommend node 10 (lts) : nvm install node@10
+- Install nvm to install a specific node version so we all work with  the same system, it seems node v9 works with serialport and electron : nvm install v9
 - Install all dependencies :  npm install
 - Launch the application : npm start
 

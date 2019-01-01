@@ -1,16 +1,15 @@
-<!DOCTYPE html>
 <html>
 
 <head>
 	<link rel="icon" type="image/png" href="media/icon.png" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Blockly</title>
-
+	<title>Blocklino - environnement de développement pour langage graphique</title>
+	<!-- JavaScript -->
 
 	<!--
-The following line is needed to load jquery with and without electron
-See here for an explanation : https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
--->
+	The following line is needed to load jquery with and without electron
+	See here for an explanation : https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
+	-->
 	<script>
 		if (typeof module === 'object') {
 			window.module = module;
@@ -18,14 +17,13 @@ See here for an explanation : https://stackoverflow.com/questions/32621988/elect
 		}
 	</script>
 
-
 	<script type="text/javascript" src="js/compilerflasher.js"></script>
 	<script type="text/javascript" src="js/blockly.min.js"></script>
 	<script type="text/javascript" src="js/type.js"></script>
 	<script type="text/javascript" src="js/types.js"></script>
 	<script type="text/javascript" src="js/typings.js"></script>
 	<script type="text/javascript" src="js/generate.js"></script>
-	<script type="text/javascript" src="js/blockly-arduino.js"></script>
+	<script type="text/javascript" src="js/blocklino.js"></script>
 	<script type="text/javascript" src="js/boards.js"></script>
 	<script type="text/javascript" src="js/jquery.min.2.1.3.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.3.3.6.js"></script>
@@ -36,156 +34,99 @@ See here for an explanation : https://stackoverflow.com/questions/32621988/elect
 	<script type="text/javascript" src="generators/arduino.js"></script>
 	<script type="text/javascript" src="generators/blockly.js"></script>
 	<script type="text/javascript" src="lang/code.js"></script>
-
-
-
-	<!-- Insert this line after script imports -->
-	<script>
-		if (window.module) module = window.module;
-	</script>
-
 	<script type="text/javascript">
 		$(window).load(function() {
 			$(".loading").fadeOut("slow");
 		});
 	</script>
-	<link rel="stylesheet" type="text/css" href="css/blockly-arduino.css" />
+
+<script>
+// this detects if we are runing inside electron or not
+	var userAgent = navigator.userAgent.toLowerCase();
+	if (userAgent.indexOf(' electron/') > -1) {
+	   // Electron-specific code
+		 require('./renderer.js')
+	}
+	</script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/blocklino.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.3.3.6.css" />
 	<link rel="stylesheet" type="text/css" href="css/prettify.min.css" />
 </head>
 
 <body onload="BlocklyDuino.init()">
 	<div class="loading"></div>
+	<div id="header">
+		<div id="btn_all">
+			<button id="btn_config" class="btn btn-arduino-vide" data-toggle="modal" data-target="#configModal" data-toggle="tooltip" data-placement="bottom" title=" Modifier la langue et les blocs disponibles ">
+				<span class="fa fa-cog fa-fw"></span>
+			</button>
+			<span style="color:#006468;font-size:20"> | </span>
+			<button id="btn_new" class="btn btn-arduino-rect" data-toggle="tooltip" data-placement="bottom" title=" Nouveau ">
+				<span class="fa fa-file fa-fw"></span>
+			</button>
+			<span style="color:#006468;font-size:4">|</span>
+			<button id="btn_fakeload" class="btn btn-arduino-rect" data-toggle="tooltip" data-placement="bottom" title=" Ouvrir ">
+				<span class="fa fa-folder-open fa-lg fa-fw"></span>
+			</button>
+			<span style="color:#006468;font-size:4">|</span>
+			<input type="file" id="load" accept=".bloc,.xml" style="display: none;" />
+			<button id="btn_saveXML" class='btn btn-arduino-rect' data-toggle="tooltip" data-placement="bottom" title=" Enregistrer/Sauvegader ">
+				<span class="fa fa-cloud-download fa-lg fa-fw"></span>
+			</button>
+			<span style="color:#006468;font-size:20"> | </span>
+			<button id="btn_example" class="btn btn-arduino" data-toggle="modal" data-target="#exampleModal" data-toggle="tooltip" data-placement="bottom" title=" Exemples ">
+				<span class="fa fa-file-text fa-fw"> </span>
+			</button>
+			<span style="color:#006468;font-size:4">|</span>
+			<button id="btn_about" class="btn btn-arduino" data-toggle="modal" data-target="#aboutModal" data-toggle="tooltip" data-placement="bottom" title=" à propos ">
+				<span class="fa fa-user fa-lg fa-fw"></span>
+			</button>
+			<span style="color:#006468;font-size:4">|</span>
+			<select id="cb_cf_ports"></select>
+			<select id="cb_cf_boards"></select>
+			<span style="color:#006468;font-size:4">|</span>
+			<button id="cb_cf_verify_btn" class="btn btn-arduino">
+				<span class="fa fa-check fa-1_5x fa-fw"> </span>
+			</button>
+			<button id="cb_cf_flash_btn" class='btn btn-arduino'>
+				<span class="fa fa-arrow-right fa-1_5x fa-fw"> </span>
+			</button>
+			<a href="codebender.xpi"><img id="btn_cb" src="media/cb_logo.png" height="30" /></a>
+			<span id="survol" style="color:white"></span>
+		</div>
+		<div id="btn_group" class="btn-group" role="group">
+			<button id="btn_undo" class="btn btn-default">
+				<span class="fa fa-undo"> </span>
+			</button>
+			<button id="btn_redo" class="btn btn-default">
+				<span class="fa fa-repeat"> </span>
+			</button>
+			<button id="btn_print" class="btn btn-default">
+				<span class="fa fa-camera"> </span>
+			</button>
+			<button id="btn_preview" class="btn btn-default">
+				<span class="fa fa-code"> </span>
+			</button>
+		</div>
+	</div>
 	<div id="divBody">
-		<div id="menuPanel">
-			<div id="menuPanelConfig">
-				<a id="clearlink" href="index.html" class="btn btn-titre btn-block" role='button'>
-					<span id="titre"> </span>
-				</a>
-				<button id="btn_configGlobal" class="btn btn-danger btn-block text-left" data-toggle="modal" data-target="#configModalGlobal">
-					<span class="fa fa-cog fa-lg"> </span>
-					<span id="configGlobalLabel"> </span>
-				</button>
-				<button id="btn_config" class="btn btn-warning btn-block " data-toggle="modal" data-target="#configModal">
-					<span class="fa fa-wrench fa-lg"> </span>
-					<span id="span_configbloc"> </span>
-				</button>
-			</div>
-			<div id="menuPanelBlockly" class="margin-top-5">
-				<ul id="ul_nav" role="tablist">
-					<li role="presentation" id="tab_blocks" class="active">
-						<a href="#content_blocks" aria-controls="content_blocks" role="tab" data-toggle="tab">
-							<span class="fa fa-puzzle-piece fa-lg"></span>
-							<span id="a_blocks"> </span>
-						</a>
-					</li>
-					<li role="presentation" id="tab_arduino">
-						<a href="#content_arduino" aria-controls="content_arduino" role="tab" data-toggle="tab">
-							<span class="fa fa-microchip fa-lg"></span>
-							<span id="a_arduino"></span>
-						</a>
-					</li>
-					<li role="presentation" id="tab_term">
-						<a href="#content_term" aria-controls="content_term" role="tab" data-toggle="tab">
-							<span class="fa fa-search"></span>
-							<span id="a_term"> </span>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div id="menuPanelFiles" class="margin-top-5">
-				<button id="btn_new" class="btn btn-success btn-block">
-					<span class="fa fa-file "></span>
-					<span id="span_delete"> </span>
-				</button>
-				<button id="btn_fakeload" class="btn btn-success btn-block">
-					<span class="fa fa-folder-open fa-lg"></span>
-					<span id="span_fakeload"> </span>
-				</button>
-				<button id="btn_saveXML" class="btn btn-success btn-block">
-					<span class="fa fa-cloud-download fa-lg"></span>
-					<span id="span_saveXML"></span>
-				</button>
-				<input type="file" id="load" accept=".bloc,.xml" style="display: none;" />
-				<button id="btn_example" class="btn btn-info btn-block" data-toggle="modal" data-target="#exampleModal">
-					<span class="fa fa-file-text"> </span>
-					<span id="span_example"> </span>
-				</button>
-				<button id="btn_factory" class="btn btn-info btn-block">
-					<span class="fa fa-industry"></span>
-					<span id="a_factory"> </span>
-				</button>
-				<button id="btn_about" type="button" class="btn btn-default btn-block active" data-toggle="modal" data-target="#aboutModal">
-					<span class="fa fa-user fa-lg"></span>
-					<span id="span_about"></span>
+		<div id="content_blocks" class="tab-pane active" style="position: relative;">
+			<div id="toggle" class="modal-content" style="display: none;">
+				<pre id="pre_previewArduino"></pre>
+				<button id="btn_saveino" class="btn btn-default">
+					<span class="fa fa-floppy-o"> </span>
 				</button>
 			</div>
 		</div>
-		<div id="divTabpanel" role="tabpanel">
-			<div id="content_area" class="tab-content">
-				<div id="content_blocks" class="tab-pane active" style="position: relative;">
-					<div id="toggle" class="modal-content" style="display: none;">
-						<pre id="pre_previewArduino"></pre>
-						<button id="btn_saveino" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title=" enregistrer en .INO ">
-							<span class="fa fa-floppy-o"> </span>
-						</button>
-					</div>
-					<div id="btn_group" class="btn-group" role="group">
-						<button id="btn_undo" class="btn btn-default">
-							<span class="fa fa-undo"> </span>
-						</button>
-						<button id="btn_redo" class="btn btn-default">
-							<span class="fa fa-repeat"> </span>
-						</button>
-						<button id="btn_print" class="btn btn-default">
-							<span class="fa fa-camera"> </span>
-						</button>
-						<button id="btn_preview" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title=" aperçu du code C/C++ ">
-							<span class="fa fa-code"> </span>
-						</button>
-					</div>
-				</div>
-				<div id="content_arduino" class="tab-pane">
-					<div id="barre">
-						<a href="codebender.xpi"><img id="btn_logo" src="media/cb_logo.png" height="30" /></a>
-						<select id="cb_cf_ports"></select>
-						<select id="cb_cf_boards"></select>
-						<button id="cb_cf_verify_btn" class="btn btn-arduino">
-							<span class="fa fa-check fa-1_5x fa-fw"></span>
-						</button>
-						<button id="cb_cf_flash_btn" class="btn btn-arduino">
-							<span class="fa fa-arrow-right fa-1_5x fa-fw"> </span>
-						</button>
-						<span id="survol" style="color:white"></span>
-					</div>
-					<pre id="pre_arduino"></pre>
-					<div id="barre_h"><br /></div>
-					<div id="local_debug"></div>
-					<div id="barre"></div>
-				</div>
-				<div id="content_term" class="tab-pane">
-					<button id="cb_cf_serial_monitor_connect" class="btn btn-info">
-						<span id="span_connect_serial"></span>
-					</button>
-					à la vitesse de <select id="cb_cf_baud_rates"></select> bauds
-					<br /><br />
-					<div class="form-group" style="padding-left:5px;padding-right:5px;">
-						<div class="input-group input-group-md icon-addon addon-md">
-							<input type="text" placeholder="Taper votre texte" name="" id="text2send" class="form-control" onkeydown="compilerflasher.pluginHandler.serialSendOnEnter(event)">
-							<span class="input-group-btn">
-								<button id="serial_send" onclick="compilerflasher.pluginHandler.serialSend()" type="button" class="btn btn-info">envoyer</button>
-							</span>
-						</div>
-					</div>
-					<pre id="serial_hud" class="well"></pre>
-					<input id="autoscroll_check" type="checkbox" checked style="display: none;">
-					<input id="echo_check" type="checkbox" checked style="display: none;">
-					<select id="serial-line-endings" style="display: none;">
-						<option value="nle">Pas de fin de ligne</option>
-						<option value="nl">Nouvelle ligne</option>
-						<option value="cr">Retour chariot</option>
-						<option value="nlcr" selected="selected">Les deux NL & RC</option>
-					</select>
+	</div>
+	<!-- message modal -->
+	<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div id="cb_cf_operation_output"></div>
 				</div>
 			</div>
 		</div>
@@ -200,7 +141,7 @@ See here for an explanation : https://stackoverflow.com/questions/32621988/elect
 				</div>
 				<div class="modal-body">
 					<span id="aboutBody"></span>
-					Dernière mise à jour : 17 oct. 2018
+					<br /><i class="fa fa-calendar-check-o"></i> 25-10-2018
 					<br />
 				</div>
 			</div>
@@ -230,15 +171,16 @@ See here for an explanation : https://stackoverflow.com/questions/32621988/elect
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
-					<span class="fa fa-wrench fa-2x" class="modal-title" id="configModalLabel"></span>
+					<span class="fa fa-cog fa-2x" class="modal-title" id="configModalLabel"></span>
 				</div>
 				<div class="modal-body">
+					<label id="span_languageMenu"></label>
+					<select id="languageMenu"></select><br /><br />
 					<div id="divToolbox">
 						<label id="labelToolboxDefinition"></label>
 						<select id="toolboxes">
-							<option value="toolbox_arduino_all" selected="selected">tous les blocs</option>
-							<option value="toolbox_6">le niveau 6ème</option>
-							<option value="toolbox_fablabke">Fablabke</option>
+							<option value="toolbox_6">Cycle 3</option>
+							<option value="toolbox_arduino_all" selected="selected">Cycle 4</option>
 						</select>
 					</div>
 				</div>
@@ -266,41 +208,6 @@ See here for an explanation : https://stackoverflow.com/questions/32621988/elect
 							</span>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- global config modal -->
-	<div class="modal fade" id="configModalGlobal" tabindex="-1" role="dialog" aria-labelledby="configModalGlobalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
-					<span class="fa fa-cog fa-2x" class="modal-title" id="configModalGlobalLabel"></span>
-				</div>
-				<div class="modal-body" id="modal-body-config-global">
-					<div class="arduino_card_mini_picture_div">
-						<img id="arduino_card_mini_picture" width="350px" />
-					</div>
-					<div class="modal-body-config-global_left">
-						<label id="span_languageMenu"></label><br />
-						<select id="languageMenu"></select><br /><br />
-						<div id="divCard">
-							<label id="labelArduinoCard"></label>
-							<div id="pinout_AIO_off"></div>
-							<select id="pinout" onmousemove="BlocklyDuino.cardPicture_change_AIO();" onchange="BlocklyDuino.cardPicture_change_AIO();">
-								<option value="arduino_leonardo">ATmega32u4</option>
-								<option value="arduino_mega">ATmega2560</option>
-								<option value="arduino_uno">ATmega328p</option>
-							</select>
-						</div>
-						<br />
-						<label id="span_lib"></label><br />
-						AFMotor<br />DHT<br />EEPROM<br />LedControl<br />LiquidCrystal<br />rgb_lcd<br />Servo<br />SoftwareSerial<br />SPI<br />Stepper<br />Wire
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button id="btn_validConfigGlobale" type="button" class="btn btn-primary" data-dismiss="modal"></button>
 				</div>
 			</div>
 		</div>
