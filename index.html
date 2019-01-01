@@ -40,8 +40,8 @@
 		});
 	</script>
 
-<script>
-// this detects if we are runing inside electron or not
+	<script>
+		// this detects if we are runing inside electron or not
 	var userAgent = navigator.userAgent.toLowerCase();
 	if (userAgent.indexOf(' electron/') > -1) {
 	   // Electron-specific code
@@ -84,6 +84,8 @@
 				<span class="fa fa-user fa-lg fa-fw"></span>
 			</button>
 			<span style="color:#006468;font-size:4">|</span>
+
+			<!-- Here starts the upload and compile system only available in electron -->
 			<select id="cb_cf_ports"></select>
 			<select id="cb_cf_boards"></select>
 			<span style="color:#006468;font-size:4">|</span>
@@ -93,8 +95,10 @@
 			<button id="cb_cf_flash_btn" class='btn btn-arduino'>
 				<span class="fa fa-arrow-right fa-1_5x fa-fw"> </span>
 			</button>
-			<a href="codebender.xpi"><img id="btn_cb" src="media/cb_logo.png" height="30" /></a>
+
 			<span id="survol" style="color:white"></span>
+			<!-- End of the upload and compile system only available in electron -->
+
 		</div>
 		<div id="btn_group" class="btn-group" role="group">
 			<button id="btn_undo" class="btn btn-default">
