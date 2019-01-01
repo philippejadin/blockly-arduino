@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Blockly based IDE for arduino",
   "main": "index.js",
-  "directories": {
-    "example": "examples"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
@@ -29,7 +26,8 @@
   "homepage": "https://github.com/philippejadin/blockly-arduino#readme",
   "devDependencies": {
     "electron": "^4.0.0",
-    "electron-rebuild": "^1.8.2"
+    "electron-packager": "^13.0.1",
+    "electron-builder": "^20.38.4"
   },
   "dependencies": {
     "arduino-cli": "^0.26.0",

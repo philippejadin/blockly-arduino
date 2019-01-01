@@ -31,13 +31,29 @@ cli.core.updateIndex().then(function(result) {
   console.error(err); // Error: "It broke"
 });
 
+
+
 // make a list of available boards and log it
 cli.listAvailableBoards().then(function(result) {
   console.log('Loaded list of avail boards successfuly');
   console.log(result)
-  log(result.length + ' boards found');
+  log(result.length + ' available boards found');
   result.forEach(function(board) {
     $('#uploader_boards').append('<option name=' + board.package + '>' + board.name + '</option>');
+  });
+}, function(err) {
+  console.error(err); // Error: "It broke"
+});
+
+
+
+// make a list of connected boards and log it
+cli.listConnectedBoards().then(function(result) {
+  console.log('Loaded list of connected boards successfuly');
+  console.log(result)
+  log(result.length + ' connected boards found');
+  result.forEach(function(board) {
+    $('#uploader_ports').append('<option name=' + board.port + '>' + board.name + ' ('+ board.port + ')</option>');
   });
 }, function(err) {
   console.error(err); // Error: "It broke"
