@@ -14,9 +14,9 @@ function log(message) {
 
 // initialize arduino cli
 if (process.platform === "win32") {
-  arduino_cli_binary = './bin/arduino-cli.exe';
+  arduino_cli_binary = './arduino-cli/arduino-cli.exe';
 } else {
-  arduino_cli_binary = './bin/arduino-cli'
+  arduino_cli_binary = './arduino-cli/arduino-cli'
 }
 
 const cli = arduino_cli_wrapper(arduino_cli_binary, {
@@ -24,7 +24,7 @@ const cli = arduino_cli_wrapper(arduino_cli_binary, {
   sketchbook_path: './arduino-cli/sketches',
 });
 
-// update index just to be sure
+// update index of available ardino boards just to be sure
 cli.core.updateIndex().then(function(result) {
   console.log('Index updated successfuly : ' + result); // "Stuff worked!"
 }, function(err) {
