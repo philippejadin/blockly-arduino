@@ -1,9 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<link rel="icon" type="image/png" href="media/icon.png" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Blockly</title>
+
+
+	<!--
+The following line is needed to load jquery with and without electron
+See here for an explanation : https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
+-->
+	<script>
+		if (typeof module === 'object') {
+			window.module = module;
+			module = undefined;
+		}
+	</script>
+
+
 	<script type="text/javascript" src="js/compilerflasher.js"></script>
 	<script type="text/javascript" src="js/blockly.min.js"></script>
 	<script type="text/javascript" src="js/type.js"></script>
@@ -21,14 +36,27 @@
 	<script type="text/javascript" src="generators/arduino.js"></script>
 	<script type="text/javascript" src="generators/blockly.js"></script>
 	<script type="text/javascript" src="lang/code.js"></script>
-	<script type="text/javascript">	$(window).load(function() {	$(".loading").fadeOut("slow");});</script>
-	<link rel="stylesheet" type="text/css" href="css/blockly-arduino.css"/>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.3.3.6.css"/>
-	<link rel="stylesheet" type="text/css" href="css/prettify.min.css"/>
+
+
+
+	<!-- Insert this line after script imports -->
+	<script>
+		if (window.module) module = window.module;
+	</script>
+
+	<script type="text/javascript">
+		$(window).load(function() {
+			$(".loading").fadeOut("slow");
+		});
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/blockly-arduino.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.3.3.6.css" />
+	<link rel="stylesheet" type="text/css" href="css/prettify.min.css" />
 </head>
+
 <body onload="BlocklyDuino.init()">
 	<div class="loading"></div>
-    <div id="divBody">
+	<div id="divBody">
 		<div id="menuPanel">
 			<div id="menuPanelConfig">
 				<a id="clearlink" href="index.html" class="btn btn-titre btn-block" role='button'>
@@ -46,22 +74,22 @@
 			<div id="menuPanelBlockly" class="margin-top-5">
 				<ul id="ul_nav" role="tablist">
 					<li role="presentation" id="tab_blocks" class="active">
-						 <a href="#content_blocks" aria-controls="content_blocks" role="tab" data-toggle="tab">
-							 <span class="fa fa-puzzle-piece fa-lg"></span>
-							 <span id="a_blocks"> </span>
-						 </a>
+						<a href="#content_blocks" aria-controls="content_blocks" role="tab" data-toggle="tab">
+							<span class="fa fa-puzzle-piece fa-lg"></span>
+							<span id="a_blocks"> </span>
+						</a>
 					</li>
 					<li role="presentation" id="tab_arduino">
-						 <a href="#content_arduino" aria-controls="content_arduino" role="tab" data-toggle="tab">
+						<a href="#content_arduino" aria-controls="content_arduino" role="tab" data-toggle="tab">
 							<span class="fa fa-microchip fa-lg"></span>
 							<span id="a_arduino"></span>
-						 </a>
+						</a>
 					</li>
 					<li role="presentation" id="tab_term">
-						 <a href="#content_term" aria-controls="content_term" role="tab" data-toggle="tab">
+						<a href="#content_term" aria-controls="content_term" role="tab" data-toggle="tab">
 							<span class="fa fa-search"></span>
 							<span id="a_term"> </span>
-						 </a>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -112,7 +140,7 @@
 						<button id="btn_print" class="btn btn-default">
 							<span class="fa fa-camera"> </span>
 						</button>
-						<button id="btn_preview" class="btn btn-default"  data-toggle="tooltip" data-placement="bottom" title=" aperçu du code C/C++ ">
+						<button id="btn_preview" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title=" aperçu du code C/C++ ">
 							<span class="fa fa-code"> </span>
 						</button>
 					</div>
@@ -139,7 +167,7 @@
 					<button id="cb_cf_serial_monitor_connect" class="btn btn-info">
 						<span id="span_connect_serial"></span>
 					</button>
-					à la vitesse de  <select id="cb_cf_baud_rates"></select> bauds
+					à la vitesse de <select id="cb_cf_baud_rates"></select> bauds
 					<br /><br />
 					<div class="form-group" style="padding-left:5px;padding-right:5px;">
 						<div class="input-group input-group-md icon-addon addon-md">
@@ -151,7 +179,7 @@
 					</div>
 					<pre id="serial_hud" class="well"></pre>
 					<input id="autoscroll_check" type="checkbox" checked style="display: none;">
-					<input id="echo_check" type="checkbox"checked style="display: none;">
+					<input id="echo_check" type="checkbox" checked style="display: none;">
 					<select id="serial-line-endings" style="display: none;">
 						<option value="nle">Pas de fin de ligne</option>
 						<option value="nl">Nouvelle ligne</option>
@@ -161,66 +189,66 @@
 				</div>
 			</div>
 		</div>
-    </div>
+	</div>
 	<!-- about modal -->
 	<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
-			<span class="fa fa-user fa-2x" class="modal-title" id="aboutModalLabel"></span>
-		  </div>
-		  <div class="modal-body">
-			<span id="aboutBody"></span>
-			Dernière mise à jour : 17 oct. 2018
-			<br />
-		  </div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
+					<span class="fa fa-user fa-2x" class="modal-title" id="aboutModalLabel"></span>
+				</div>
+				<div class="modal-body">
+					<span id="aboutBody"></span>
+					Dernière mise à jour : 17 oct. 2018
+					<br />
+				</div>
+			</div>
 		</div>
-	  </div>
 	</div>
 	<!-- example modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
-			<span class="fa fa-file-text fa-2x" class="modal-title" id="exampleModalLabel"></span>
-		  </div>
-		  <div class="modal-body">
-			<div class="table-responsive">
-				<table class="table table-hover">
-					<tbody id="includedContent"></tbody>
-				</table>
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
+					<span class="fa fa-file-text fa-2x" class="modal-title" id="exampleModalLabel"></span>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<tbody id="includedContent"></tbody>
+						</table>
+					</div>
+				</div>
 			</div>
-		  </div>
 		</div>
-	  </div>
 	</div>
 	<!-- toolbox config modal -->
 	<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
-			<span class="fa fa-wrench fa-2x" class="modal-title"  id="configModalLabel"></span>
-		  </div>
-			<div class="modal-body">
-				<div id="divToolbox">
-					<label id="labelToolboxDefinition"></label>
-					<select id="toolboxes">
-						<option value="toolbox_arduino_all" selected="selected">tous les blocs</option>
-						<option value="toolbox_6">le niveau 6ème</option>
-						<option value="toolbox_fablabke">Fablabke</option>
-					</select>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
+					<span class="fa fa-wrench fa-2x" class="modal-title" id="configModalLabel"></span>
+				</div>
+				<div class="modal-body">
+					<div id="divToolbox">
+						<label id="labelToolboxDefinition"></label>
+						<select id="toolboxes">
+							<option value="toolbox_arduino_all" selected="selected">tous les blocs</option>
+							<option value="toolbox_6">le niveau 6ème</option>
+							<option value="toolbox_fablabke">Fablabke</option>
+						</select>
+					</div>
+				</div>
+				<input type="checkbox" name="select_all" id="select_all" /> <span id="span_select_all"> </span>
+				<div class="modal-body" id="modal-body-config"></div>
+				<div class="modal-footer">
+					<button id="btn_valid_config" type="button" class="btn btn-primary"></button>
 				</div>
 			</div>
-		  <input type="checkbox" name="select_all" id="select_all"/> <span id="span_select_all"> </span>
-		  <div class="modal-body" id="modal-body-config"></div>
-		  <div class="modal-footer">
-			<button id="btn_valid_config" type="button" class="btn btn-primary"></button>
-		  </div>
 		</div>
-	  </div>
 	</div>
 	<!-- variable modal -->
 	<div class="modal fade" id="variableModal" tabindex="-1" role="dialog" aria-labelledby="variableModalLabel" aria-hidden="true">
@@ -228,7 +256,9 @@
 			<div class="modal-content">
 				<div class="modal-body" id="modal-body-variableModal">
 					<div class="form-group">
-						<label ><div id = "variableModalLabel" class="modal-title"></div></label>
+						<label>
+							<div id="variableModalLabel" class="modal-title"></div>
+						</label>
 						<div class="input-group input-group-md icon-addon addon-md">
 							<input type="text" class="form-control" id="var_name">
 							<span class="input-group-btn">
@@ -250,11 +280,11 @@
 				</div>
 				<div class="modal-body" id="modal-body-config-global">
 					<div class="arduino_card_mini_picture_div">
-						<img id="arduino_card_mini_picture" width="350px"/>
+						<img id="arduino_card_mini_picture" width="350px" />
 					</div>
 					<div class="modal-body-config-global_left">
-						<label id="span_languageMenu"></label><br/>
-						<select id="languageMenu"></select><br/><br/>
+						<label id="span_languageMenu"></label><br />
+						<select id="languageMenu"></select><br /><br />
 						<div id="divCard">
 							<label id="labelArduinoCard"></label>
 							<div id="pinout_AIO_off"></div>
@@ -270,10 +300,11 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button id="btn_validConfigGlobale" type="button" class="btn btn-primary"  data-dismiss="modal"></button>
+					<button id="btn_validConfigGlobale" type="button" class="btn btn-primary" data-dismiss="modal"></button>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
+
 </html>

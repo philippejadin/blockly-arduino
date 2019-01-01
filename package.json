@@ -1,0 +1,36 @@
+{
+  "name": "blockly-arduino",
+  "version": "1.0.0",
+  "description": "Blockly based IDE for arduino",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philippejadin/blockly-arduino.git"
+  },
+  "keywords": [
+    "blockly",
+    "arduino",
+    "electron",
+    "nodejs"
+  ],
+  "author": "Philippe Jadin",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/philippejadin/blockly-arduino/issues"
+  },
+  "homepage": "https://github.com/philippejadin/blockly-arduino#readme",
+  "devDependencies": {
+    "electron": "^4.0.0"
+  },
+  "dependencies": {
+    "arduino-cli": "^0.26.0",
+    "serialport": "^7.1.1"
+  }
+}
