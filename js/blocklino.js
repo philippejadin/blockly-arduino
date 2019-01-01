@@ -44,7 +44,7 @@ BlocklyDuino.init = function() {
     BlocklyDuino.loadBlocks();
   }
   window.addEventListener('unload', BlocklyDuino.backupBlocks, false);
-  BlocklyDuino.initCompilerFlasher();
+  //BlocklyDuino.initCompilerFlasher();
 };
 
 // init the compiler system

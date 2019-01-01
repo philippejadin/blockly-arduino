@@ -1,0 +1,14 @@
+#console
+{
+  position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    border-top: 3px solid #73AD21;
+    background-color: black;
+    z-index:100;
+    color: white;
+    max-height: 10em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

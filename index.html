@@ -17,7 +17,6 @@
 		}
 	</script>
 
-	<script type="text/javascript" src="js/compilerflasher.js"></script>
 	<script type="text/javascript" src="js/blockly.min.js"></script>
 	<script type="text/javascript" src="js/type.js"></script>
 	<script type="text/javascript" src="js/types.js"></script>
@@ -53,6 +52,7 @@
 	<link rel="stylesheet" type="text/css" href="css/blocklino.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.3.3.6.css" />
 	<link rel="stylesheet" type="text/css" href="css/prettify.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/console.css" />
 </head>
 
 <body onload="BlocklyDuino.init()">
@@ -86,15 +86,17 @@
 			<span style="color:#006468;font-size:4">|</span>
 
 			<!-- Here starts the upload and compile system only available in electron -->
-			<select id="cb_cf_ports"></select>
-			<select id="cb_cf_boards"></select>
-			<span style="color:#006468;font-size:4">|</span>
-			<button id="cb_cf_verify_btn" class="btn btn-arduino">
-				<span class="fa fa-check fa-1_5x fa-fw"> </span>
-			</button>
-			<button id="cb_cf_flash_btn" class='btn btn-arduino'>
-				<span class="fa fa-arrow-right fa-1_5x fa-fw"> </span>
-			</button>
+			<span class="uploader">
+				<select id="uploader_ports"></select>
+				<select id="uploader_boards"></select>
+				<span style="color:#006468;font-size:4">|</span>
+				<button id="uploader_verify" class="btn btn-arduino">
+					<span class="fa fa-check fa-1_5x fa-fw"> </span>
+				</button>
+				<button id="uploader_flash" class='btn btn-arduino'>
+					<span class="fa fa-arrow-right fa-1_5x fa-fw"> </span>
+				</button>
+			</span>
 
 			<span id="survol" style="color:white"></span>
 			<!-- End of the upload and compile system only available in electron -->
@@ -125,6 +127,11 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="console">
+
+	</div>
+
 	<!-- message modal -->
 	<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
