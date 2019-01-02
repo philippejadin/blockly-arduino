@@ -39,14 +39,6 @@
 		});
 	</script>
 
-	<script>
-		// this detects if we are runing inside electron or not
-	var userAgent = navigator.userAgent.toLowerCase();
-	if (userAgent.indexOf(' electron/') > -1) {
-	   // Electron-specific code
-		 require('./renderer.js')
-	}
-	</script>
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/blocklino.css" />
@@ -223,6 +215,19 @@
 			</div>
 		</div>
 	</div>
+
+
+	<script>
+	// This script is placed at the end of the document so we ensure the document is ready for further manipulations
+		// this detects if we are runing inside electron or not
+		var userAgent = navigator.userAgent.toLowerCase();
+		if (userAgent.indexOf(' electron/') > -1) {
+			// Electron-specific code
+			require('./renderer.js')
+		}
+	</script>
+
+
 </body>
 
 </html>

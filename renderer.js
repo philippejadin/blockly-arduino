@@ -3,6 +3,8 @@
 // All of the Node.js APIs are available in this process.
 
 
+
+
 var arduino_cli_wrapper = require('arduino-cli').default;
 var jquery = require('jquery');
 const os = require('os');
@@ -82,7 +84,7 @@ cli.listConnectedBoards().then(function(result) {
   console.log(result)
   log(result.length + ' connected boards found');
   result.forEach(function(board) {
-    $('#uploader_ports').append('<option name="' + board.port + '">' + board.port + ' (' + board.port + ')</option>');
+    $('#uploader_ports').append('<option name="' + board.port + '">' + board.port + ' (' + board.name + ')</option>');
     $('#uploader_boards').prepend('<option selected="selected" name="' + board.fqbn + '">' + board.name + ' (' + board.port + ')</option>');
   });
   if (result.length == 0) {
@@ -92,3 +94,8 @@ cli.listConnectedBoards().then(function(result) {
 }, function(err) {
   console.error(err);
 });
+
+
+$('#uploader_verify').on('click', function() {
+    console.log('Code verification begins');
+})
