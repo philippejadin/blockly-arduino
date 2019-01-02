@@ -7,13 +7,15 @@ goog.provide("Blockly.Blocks.variables");
 goog.provide("Blockly.Blocks.texts");
 goog.provide("Blockly.Blocks.tab");
 goog.require("Blockly.Blocks");
-Blockly.Blocks.loops.HUE = "#696969";
-Blockly.Blocks.logic.HUE = "#696969";
-Blockly.Blocks.math.HUE = "#00CC00";
-Blockly.Blocks.procedures.HUE = "#FF0000";
-Blockly.Blocks.texts.HUE = "#FD6C9E";
-Blockly.Blocks.variables.HUE = "#FFA500";
-Blockly.Blocks.tab.HUE = "#804000";
+
+Blockly.Msg["LOOPS_HUE"] = "#696969";
+Blockly.Msg["LOGIC_HUE"] = "#696969";
+Blockly.Msg["MATH_HUE"] = "#00CC00";
+Blockly.Msg["PROCEDURES_HUE"] = "#FF0000";
+Blockly.Msg["TEXTS_HUE"] = "#FD6C9E";
+Blockly.Msg["VARIABLES_HUE"] = "#FFA500";
+Blockly.Msg["TAB_HUE"] = "#804000";
+
 Blockly.Blocks["variables_get"] = {
     init: function() {
         this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
