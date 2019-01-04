@@ -1,12 +1,10 @@
 {
   "name": "blockly-arduino",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Blockly based IDE for arduino",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "install": "electron-rebuild"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -24,14 +22,35 @@
     "url": "https://github.com/philippejadin/blockly-arduino/issues"
   },
   "homepage": "https://github.com/philippejadin/blockly-arduino#readme",
+  "build": {
+    "appId": "com.electron.blocklino",
+    "asar": false,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": "x64"
+        }
+      ],
+      "nsis": {
+        "installerIcon": "buid/.ico",
+        "uninstallerIcon": "buid/.ico",
+        "oneClick": false,
+        "perMachine": true,
+        "deleteAppDataOnUninstall": true,
+        "allowToChangeInstallationDirectory": true,
+        "license": "LICENSE",
+        "runAfterFinish": true,
+        "include": "build/installer.nsh"
+      },
+      "icon": "build/.ico"
+    }
+  },
   "devDependencies": {
-    "electron": "^4.0.0",
-    "electron-packager": "^13.0.1",
-    "electron-builder": "^20.38.4"
+    "electron": "^3"
   },
   "dependencies": {
     "arduino-cli": "^0.26.0",
-    "jquery": "^3.3.1",
-    "serialport": "^7.1.1"
+    "jquery": "^3.3.1"
   }
 }

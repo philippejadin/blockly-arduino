@@ -1,0 +1,78 @@
+{
+  "name": "blockly-arduino",
+  "version": "0.1.0",
+  "description": "Blockly based IDE for arduino",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint src --color"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philippejadin/blockly-arduino.git"
+  },
+  "keywords": [
+    "blockly",
+    "arduino",
+    "electron",
+    "nodejs"
+  ],
+  "author": "Philippe Jadin",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/philippejadin/blockly-arduino/issues"
+  },
+  "homepage": "https://github.com/philippejadin/blockly-arduino#readme",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "zip"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "zip"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "yarn"
+      },
+      "electronWinstallerConfig": {
+        "name": "forgetest"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "forgetest"
+      }
+    }
+  },
+  "dependencies": {
+    "electron-compile": "^6.4.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "arduino-cli": "^0.26.0",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.3",
+    "electron-prebuilt-compile": "4.0.0",
+    "eslint": "^3",
+    "eslint-config-airbnb": "^15",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-jsx-a11y": "^5",
+    "eslint-plugin-react": "^7"
+  }
+}

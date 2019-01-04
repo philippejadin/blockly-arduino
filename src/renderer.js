@@ -15,7 +15,12 @@ const fs = require('fs');
 // TODO : Need refactor into a separate small module (or find an existing one in npm
 function log(message) {
   $('#console').append('<div>' + message + '</div>');
+  console.log(message);
 }
+
+log('Node version ' + process.versions.node)
+log('Chrome version ' + process.versions.chrome)
+log('Electron version ' + process.versions.electron)
 
 // initialize arduino cli
 if (process.platform === "win32") {
